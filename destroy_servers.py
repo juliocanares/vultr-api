@@ -23,7 +23,6 @@ def destroy_all_servers():
         exit()
 
     for subid in servers.keys():
-        print(subid)
         destroyServer(subid)
 
     print('all servers destroyed')
