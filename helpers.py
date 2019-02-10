@@ -1,5 +1,4 @@
 import os
-import threading
 import requests
 
 from dotenv import load_dotenv
@@ -32,14 +31,3 @@ endpoints = {
     'server_create': get_url('server/create'),
     'server_destroy': get_url('server/destroy')
 }
-
-
-def set_interval(func, sec):
-    def method():
-        set_interval(func, sec)
-        func()
-
-    timer = threading.Timer(sec, method)
-    timer.start()
-
-    return timer

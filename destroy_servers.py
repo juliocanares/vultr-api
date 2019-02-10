@@ -1,4 +1,6 @@
-from helpers import execute, set_interval
+#!/usr/bin/env python3
+
+from helpers import execute
 from list_servers import list_servers
 
 
@@ -15,17 +17,13 @@ def destroyServer(subid):
     print('there was a problem!')
 
 
-def destroy_all_servers():
-    servers = list_servers()
+servers = list_servers()
 
-    if len(servers) is 0:
-        print('no servers to destroy')
-        exit()
+if len(servers) is 0:
+    print('no servers to destroy')
+    exit()
 
-    for subid in servers.keys():
-        destroyServer(subid)
+for subid in servers.keys():
+    destroyServer(subid)
 
-    print('all servers destroyed')
-
-
-destroy_all_servers()
+print('all servers destroyed')
