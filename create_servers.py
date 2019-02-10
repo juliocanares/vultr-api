@@ -26,7 +26,6 @@ def create_server(hostname):
 def checkServers():
     servers = list_servers()
 
-    counter = 0
     serversReady = []
 
     for id in new_server_ids:
