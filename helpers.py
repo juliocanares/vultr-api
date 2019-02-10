@@ -1,3 +1,4 @@
+import os
 import threading
 import requests
 
@@ -5,9 +6,10 @@ from dotenv import load_dotenv
 
 load_dotenv(verbose=True)
 
-import os
 
 api_key = os.getenv('API_KEY')
+
+print(api_key)
 
 base_url = 'https://api.vultr.com/v1'
 
