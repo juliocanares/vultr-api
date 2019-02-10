@@ -1,7 +1,20 @@
 #!/usr/bin/env python3
-
+import argparse
 from helpers import execute
 from list_servers import list_servers
+
+parser = argparse.ArgumentParser('destroy servers')
+parser.add_argument('--hostname', type=str)
+
+args = parser.parse_args()
+
+
+def exitOnEmpty(items):
+    if len(items) != 0:
+        return
+
+    print('no servers to destroy')
+    exit()
 
 
 def destroyServer(subid):
@@ -19,11 +32,26 @@ def destroyServer(subid):
 
 servers = list_servers()
 
-if len(servers) is 0:
-    print('no servers to destroy')
-    exit()
+exitOnEmpty(servers)
 
-for subid in servers.keys():
+hostname = args.hostname
+subidsToRemove = []
+
+for subid in servers:
+    server = servers[subid]
+
+    if hostname:
+        if server['tag'] == hostname:
+            subidsToRemove.append(subid)
+    else:
+        subidsToRemove.append(subid)
+
+exitOnEmpty(subidsToRemove)
+
+for subid in subidsToRemove:
     destroyServer(subid)
 
-print('all servers destroyed')
+if hostname:
+    print(f'all {hostname} servers destroyed')
+else:
+    print('all servers destroyed')

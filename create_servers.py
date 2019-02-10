@@ -11,14 +11,20 @@ parser.add_argument('--hostname',  required=True, type=str)
 
 args = parser.parse_args()
 
+delimiter = '-'
+
 
 def create_server(hostname):
+    hostname_parts = hostname.split(delimiter)
+    label = delimiter.join(hostname_parts[:-1])
+
     data = {
         'DCID': 39,
         'VPSPLANID': 201,
         'OSID': 270,
         'SSHKEYID': '5c5e3f4ee8b5d',
         'hostname': hostname,
+        'tag': label,
         'label': hostname
     }
 
@@ -40,7 +46,7 @@ def checkServers():
 new_server_ids = []
 
 for i in range(args.servers):
-    hostname = f'{args.hostname}-{i + 1}'
+    hostname = f'{args.hostname}{delimiter}{i + 1}'
     response = create_server(hostname)
 
     print(f'creating {hostname}')
