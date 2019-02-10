@@ -9,8 +9,6 @@ load_dotenv(verbose=True)
 
 api_key = os.getenv('API_KEY')
 
-print(api_key)
-
 base_url = 'https://api.vultr.com/v1'
 
 
